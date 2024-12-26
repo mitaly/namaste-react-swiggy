@@ -19,6 +19,7 @@ body {
     gap: 10px;
 }
 
+/* Restaurant list styles */
 .restaurant-list {
     display: flex;
     flex-direction: row;
@@ -33,16 +34,47 @@ body {
     flex-direction: column;
     width: 300px;
     padding: 10px;
+
+    img {
+        width:100px;
+        height:100px;
+        align-self: center;
+    }
 }
 
 .restaurant-container *{
     margin: 2px;
 }
 
-.restaurant-container {
-    img {
+/* Shimmer styles*/
+.shimmer-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 10px;
+}
+.shimmer-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 10px;
+
+    .img {
+        background-color: #ECE9EB;
         width:100px;
         height:100px;
         align-self: center;
     }
+
+    .text {
+        background-color: #ECE9EB;
+        width: 100%;
+        height: 16px;
+        align-self: center;
+    }
+}
+
+.shimmer-container *{
+    margin: 2px;
 }

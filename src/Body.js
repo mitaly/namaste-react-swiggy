@@ -1,7 +1,7 @@
-import {restaurants} from '../mock-data';
+// import {restaurants} from '../mock-data';
 import {restaurantBaseImgUrl, swiggyAPIFetchRestaurants} from './constants';
 import {useState, useEffect} from 'react';
-
+import Shimmer from './Shimmer';
 const SearchBox = ({filterList, setShowList}) => {
     const [searchText, setSearchText] = useState();
     
@@ -35,8 +35,9 @@ const RestaurantBox = ({restaurant}) => {
 }
 
 export default Body = () => {
-    const [restaurantList, setRestaurantList] = useState(restaurants);
-    const [showList, setShowList] = useState(restaurants);
+    const [restaurantList, setRestaurantList] = useState([]);
+    const [showList, setShowList] = useState([]);
+    const [isDataFetched, setDataFetched] = useState(false);
 
     useEffect(()=> {fetchRestaurants()}, []);
 
@@ -46,18 +47,39 @@ export default Body = () => {
         const restaurantsResult = body?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
         setRestaurantList(restaurantsResult);
-        setShowList(restaurantsResult);
+        setShowList([]);
+        setDataFetched(true);
     }
 
-
+    if (!restaurantList) return null;
     return (
-        <div>
-            <SearchBox filterList={restaurantList} setShowList={setShowList}/>
-            <div className="restaurant-list">
+        <>
+            <SearchBox filterList={restaurantList} setShowList={setShowList}/>    
             {
-                showList.map(res => <RestaurantBox key={res.info.id} restaurant={res.info} />)
+                
+                isDataFetched ? (
+                    ( showList.length>0) ?
+                        <div className="restaurant-list">
+                        {
+                            showList.map(res => <RestaurantBox key={res.info.id} restaurant={res.info} />)
+                        }
+                        </div>
+                        :
+                        <h2>No restuarants found!</h2>
+                )
+                : 
+                <Shimmer />
             }
-            </div>
-        </div>
+        </>   
     )
 }
+
+/**
+ * Reconcilation algorithm is part of core React lib
+ * 
+ * Js expression vs statements
+ * 
+ * What code we can write inside {} of JSX ? We can only write expressions(which returns something)
+ * not statements(like if, else, for, etc.)
+ * 
+ */
