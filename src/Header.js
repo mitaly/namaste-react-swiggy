@@ -18,7 +18,7 @@ export default Header = () => {
             <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/aboutUs">About</Link></li>
-                <li><a href="">Contact</a></li>
+                <li><Link to="/contact">Contact</Link></li>
                 <div>
                     <button disabled={isLoggedIn} onClick={()=>setLoggedIn(true)}>Login</button>
                     <button disabled={!isLoggedIn} onClick={()=> setLoggedIn(false)}>Logout</button>
