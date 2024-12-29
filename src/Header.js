@@ -1,4 +1,14 @@
+import {useState, useEffect} from 'react';
+import {Link} from 'react-router';
+function isAuthenticated(){
+    return true;
+}
 export default Header = () => {
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    // useEffect(()=> {
+    //     setLoggedIn(isAuthenticated)
+    // }, [isLoggedIn]);
+
     return (
         <div className="header-container">
             <a href="/">
@@ -6,9 +16,13 @@ export default Header = () => {
                 alt="My Restaurant logo" />
             </a>
             <ul>
-                <li><a href="" >Home</a></li>
-                <li><a href="">About</a></li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/aboutUs">About</Link></li>
                 <li><a href="">Contact</a></li>
+                <div>
+                    <button disabled={isLoggedIn} onClick={()=>setLoggedIn(true)}>Login</button>
+                    <button disabled={!isLoggedIn} onClick={()=> setLoggedIn(false)}>Logout</button>
+                </div>
             </ul>
         </div>
     )

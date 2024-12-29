@@ -47,7 +47,7 @@ export default Body = () => {
         const restaurantsResult = body?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
         setRestaurantList(restaurantsResult);
-        setShowList([]);
+        setShowList(restaurantsResult);
         setDataFetched(true);
     }
 
