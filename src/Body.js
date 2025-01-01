@@ -2,6 +2,7 @@
 import {restaurantBaseImgUrl, swiggyAPIFetchRestaurants} from './constants';
 import {useState, useEffect} from 'react';
 import Shimmer from './Shimmer';
+import {Link} from 'react-router';
 const SearchBox = ({filterList, setShowList}) => {
     const [searchText, setSearchText] = useState();
     
@@ -59,11 +60,15 @@ export default Body = () => {
                 
                 isDataFetched ? (
                     ( showList.length>0) ?
-                        <div className="restaurant-list">
+                        <ul className="restaurant-list">
                         {
-                            showList.map(res => <RestaurantBox key={res.info.id} restaurant={res.info} />)
+                            showList.map(res => 
+                                (<Link to={`restaurants/${res.info.id}`} key={res.info.id}>
+                                    <RestaurantBox  restaurant={res.info} />
+                                </Link>)
+                            )
                         }
-                        </div>
+                        </ul>
                         :
                         <h2>No restuarants found!</h2>
                 )
